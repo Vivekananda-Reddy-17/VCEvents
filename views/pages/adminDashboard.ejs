@@ -1,0 +1,90 @@
+<% layout("layouts/boilerplate") %> <br />
+
+<section id="admin" class="py-5">
+  <div class="container">
+    <h1 class="text-center mb-5">Admin Dashboard</h1>
+    <div class="row ">
+      <div class="col-md-3">
+        <div class="card text-center mb-4">
+          <div class="card-body">
+            <h3>1,024</h3>
+            <p>Total Registrations</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card text-center mb-4">
+          <div class="card-body">
+            <h3><%= events.length %></h3>
+            <p>Active Events</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card text-center mb-4">
+          <div class="card-body">
+            <h3>4.5</h3>
+            <p>Average Rating</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card text-center mb-4">
+          <div class="card-body">
+            <h3>76%</h3>
+            <p>Success Rate</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container my-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="text-muted">Manage Events</h2>
+    <a href="admin/events/new" class="btn btn-success">+ Add New Event</a>
+  </div>
+
+  <% if (events.length === 0) { %>
+  <p class="text-muted">No events yet.</p>
+  <% } else { %>
+  <div class="row g-4">
+    <% events.forEach(event => { %>
+    <div class="col-md-4">
+      <div class="card h-100 shadow-sm">
+        <img
+          src="<%= event.imageUrl %>"
+          class="card-img-top"
+          alt="<%= event.title %>"
+        />
+        <div class="card-body">
+          <h5 class="card-title"><%= event.title %></h5>
+          <p class="card-text"><%= event.date %> | <%= event.venue %></p>
+          <div class="d-flex justify-content-between">
+            <a
+              href="/events/<%= event._id %>"
+              class="btn btn-outline-primary btn-sm"
+              >View</a
+            >
+            <a
+              href="/admin/<%= event._id %>/edit"
+              class="btn btn-sm btn-outline-dark"
+              >Edit</a
+            >
+            <form
+              method="POST"
+              action="/events/<%= event._id %>?_method=DELETE"
+              onsubmit="return confirm('Delete this event?');"
+            >
+              <button class="btn btn-outline-danger btn-sm">Delete</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% }) %>
+  </div>
+  <% } %>
+</div>
+<br />

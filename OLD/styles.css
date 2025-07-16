@@ -1,0 +1,338 @@
+body {
+    padding: 0;
+    margin: 0;
+}
+
+.hero-section {
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1511578314322-379afb476865');
+    background-size: cover;
+    background-position: center;
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#VC{
+    color: #323c72; /* #5161B3 */
+    font-size: 30px;
+    font-weight: 750;
+}
+
+#Events{
+    color: #70898e;
+    font-size: 30px;
+    font-weight: 750;
+}
+
+#vents{
+    font-size: 15px;
+    color: #70898e;
+    font-weight: 750;
+}
+
+/* Hero Section Styling */
+.hero-section {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+    background: url('assets/') no-repeat center center/cover; /* Initial background */
+    transition: background 1s ease-out; /* Smooth transition effect */
+}
+
+.btn{
+    color: #fff !important;
+}
+
+/* Transparent Navbar (default at the top) */
+.navbar {
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    background-color: transparent; /* Transparent background */
+    box-shadow: none; /* No shadow */
+    z-index: 999;
+    position: fixed;
+}
+
+/* Solid Background Navbar (when scrolling) */
+.navbar.scrolled {
+    background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black background */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Optional shadow */
+}
+
+
+.navbar-brand{
+    vertical-align: bottom;
+}
+
+/* Navbar Toggler Animation */
+.navbar-toggler {
+    transition: transform 0.3s ease-in-out;
+}
+
+.navbar-toggler.toggled {
+    transform: rotate(90deg); /* Rotate when toggled */
+}
+
+.navbar-toggler:focus {
+    outline: none; /* Removes the focus border */
+    box-shadow: none; /* Removes any additional box shadow */
+}
+
+
+.countdown-timer .time-block {
+    background: #343a40;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    min-width: 100px;
+}
+
+.countdown-timer .time-block span:first-child {
+    font-size: 2.5rem;
+    display: block;
+}
+
+/* Search Bar Container */
+#eventSearch {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px 15px;
+    margin: 20px auto;
+    font-size: 1rem;
+    color: #333;
+    border: 2px solid #ddd;
+    border-radius: 25px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+/* Focus State for Search Bar */
+#eventSearch:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+}
+
+/* Placeholder Text */
+#eventSearch::placeholder {
+    color: #aaa;
+    font-style: italic;
+}
+
+/* Filter Dropdown Container */
+#eventCategory {
+    width: 100%;
+    max-width: 300px;
+    padding: 10px 15px;
+    margin: 20px auto;
+    font-size: 1rem;
+    color: #333;
+    border: 2px solid #ddd;
+    border-radius: 25px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+/* Focus State for Filter Dropdown */
+#eventCategory:focus {
+    border-color: #28a745;
+    box-shadow: 0 0 10px rgba(40, 167, 69, 0.5);
+}
+
+/* Dropdown Options Styling */
+#eventCategory option {
+    padding: 5px 10px;
+    font-size: 1rem;
+    color: #333;
+}
+
+#event-calendar {
+    max-width: 80%;
+    margin: 30px auto;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: white;
+    /* display: flex;
+    justify-content: center; */
+}
+
+.fc-day-today {
+    background-color: #ffe0b2 !important; /* Light orange background */
+    border-radius: 5px;
+}
+
+
+.event-card {
+    transition: transform 0.3s;
+    height: 100%;
+}
+
+.event-card:hover {
+    transform: translateY(-5px);
+}
+
+.event-details {
+    display: flex;
+    justify-content: space-between;
+    color: #6c757d;
+}
+
+.category-card {
+    background: white;
+    border-radius: 10px;
+    transition: transform 0.3s;
+    cursor: pointer;
+}
+
+.category-card:hover {
+    transform: translateY(-5px);
+}
+
+.gallery-img {
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.gallery-img:hover {
+    transform: scale(1.05);
+}
+
+/* Registration Form */
+
+.registration-form {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+.registration-form .form-control,
+.registration-form .form-select {
+    border-color: #dee2e6;
+    height: 50px;
+    font-size: 1rem;
+}
+
+.registration-form .form-control:focus,
+.registration-form .form-select:focus {
+    border-color: #212529;
+    box-shadow: none;
+}
+
+.registration-form button {
+    height: 50px;
+    letter-spacing: 1px;
+}
+
+.modal.fade .modal-dialog {
+    transform: translateY(-50px);
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+}
+
+.modal.show .modal-dialog {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+
+
+/* Confetti container */
+.confetti-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+/* Individual confetti pieces */
+.confetti {
+    position: absolute;
+    width: 10px;
+    height: 20px;
+    background-color: var(--confetti-color, #ff0);
+    opacity: 0;
+    transform: rotate(0deg);
+    animation: confetti-animation 2s ease-out forwards;
+}
+
+/* Confetti animation */
+@keyframes confetti-animation {
+    0% {
+        opacity: 1;
+        transform: translateY(0) rotate(0deg);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(500px) rotate(720deg);
+    }
+}
+
+
+@media (max-width: 768px) {
+    .countdown-timer .time-block {
+        min-width: 70px;
+        padding: 10px;
+    }
+    
+    .countdown-timer .time-block span:first-child {
+        font-size: 1.5rem;
+    }
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+.navbar-toggler.toggled {
+    animation: bounce 0.3s ease-in-out;
+}
+
+/* Fade-in effect */
+.fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Adjust Calendar for Smaller Screens */
+@media (max-width: 768px) {
+    #event-calendar {
+        margin: 10px; /* Reduce margin */
+        font-size: 14px; /* Smaller text for compact view */
+    }
+
+    .fc-toolbar {
+        flex-wrap: wrap; /* Stack toolbar buttons */
+    }
+
+    .fc-header-toolbar .fc-toolbar-chunk {
+        margin: 5px 0; /* Add spacing between toolbar chunks */
+        text-align: center;
+    }
+
+    .fc-daygrid-day-number {
+        font-size: 12px; /* Smaller day numbers */
+    }
+}

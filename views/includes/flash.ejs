@@ -1,0 +1,48 @@
+<% if (typeof success !== 'undefined' && success.length > 0) { %>
+<div class="alert alert-success alert-dismissible fade show flash-message" role="alert">
+  <%= success %>
+  <button
+    type="button"
+    class="btn-close"
+    data-bs-dismiss="alert"
+    aria-label="Close"
+  ></button>
+</div>
+<% } %> <% if (typeof error !== 'undefined' && error.length > 0) { %>
+<div class="alert alert-danger alert-dismissible fade show flash-message" role="alert">
+  <%= error %>
+  <button
+    type="button"
+    class="btn-close"
+    data-bs-dismiss="alert"
+    aria-label="Close"
+  ></button>
+</div>
+<% } %>
+
+<style>
+  .flash-message {
+  position: fixed;
+  top: 1rem;
+  left: 50%;
+  opacity: 0.9;
+  transform: translateX(-50%);
+  z-index: 1055; /* Higher than modals and navbar */
+  min-width: 300px;
+  max-width: 600px;
+  padding: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+</style>
+
+<script>
+  setTimeout(() => {
+    const flash = document.querySelector('.flash-message');
+    if (flash) {
+      flash.classList.remove('show');
+      setTimeout(() => flash.remove(), 300); // Wait for fade-out
+    }
+  }, 4000); // 4 seconds
+</script>
+

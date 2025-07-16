@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Add New Event</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background: #f8f9fa;
+      }
+      .form-container {
+        max-width: 700px;
+        margin: 40px auto;
+        padding: 30px;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        text-align: center;
+        margin-bottom: 30px;
+        color: #343a40;
+        font-weight: 700;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="form-container">
+      <h1>Create New Event</h1>
+      <form action="/admin/events" method="POST" novalidate>
+        <div class="mb-3">
+          <label for="title" class="form-label fw-semibold">Event Title</label>
+          <input
+            type="text"
+            id="title"
+            name="event[title]"
+            class="form-control"
+            placeholder="Enter event title"
+            required
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="description" class="form-label fw-semibold"
+            >Description</label
+          >
+          <textarea
+            id="description"
+            name="event[description]"
+            class="form-control"
+            rows="4"
+            placeholder="Describe your event"
+            required
+          ></textarea>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label for="date" class="form-label fw-semibold">Date & Time</label>
+            <input
+              type="datetime-local"
+              id="date"
+              name="event[date]"
+              class="form-control"
+              required
+            />
+          </div>
+
+          <div class="col-md-6">
+            <label for="location" class="form-label fw-semibold"
+              >Location</label
+            >
+            <input
+              type="text"
+              id="location"
+              name="event[location]"
+              class="form-control"
+              placeholder="Where is it held?"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="image" class="form-label fw-semibold">Image URL</label>
+          <input
+            type="url"
+            id="image"
+            name="event[image]"
+            class="form-control"
+            placeholder="Image link for the event poster"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label for="organizer" class="form-label fw-semibold"
+              >Organizer Name</label
+            >
+            <input
+              type="text"
+              id="organizer"
+              name="event[organizer]"
+              class="form-control"
+              placeholder="Who is organizing?"
+            />
+          </div>
+
+          <div class="col-md-6">
+            <label for="category" class="form-label fw-semibold"
+              >Category</label
+            >
+            <select
+              id="category"
+              name="event[category]"
+              class="form-select"
+              required
+            >
+              <option value="" selected disabled>Select category</option>
+              <option value="Conference">Conference</option>
+              <option value="Workshop">Workshop</option>
+              <option value="Meetup">Meetup</option>
+              <option value="Webinar">Webinar</option>
+              <option value="Concert">Concert</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label for="capacity" class="form-label fw-semibold"
+              >Capacity</label
+            >
+            <input
+              type="number"
+              id="capacity"
+              name="event[capacity]"
+              class="form-control"
+              min="1"
+              placeholder="Number of attendees"
+            />
+          </div>
+
+          <div class="col-md-6">
+            <label for="price" class="form-label fw-semibold">Price (₹)</label>
+            <input
+              type="number"
+              id="price"
+              name="event[price]"
+              class="form-control"
+              min="0"
+              step="0.01"
+              placeholder="Ticket price (0 if free)"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="tags" class="form-label fw-semibold">Tags</label>
+          <input
+            type="text"
+            id="tags"
+            name="event[tags]"
+            class="form-control"
+            placeholder="Comma separated tags (e.g., tech, workshop)"
+          />
+          <small class="form-text text-muted">
+            Use commas to separate tags.
+          </small>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label for="contactEmail" class="form-label fw-semibold"
+              >Contact Email</label
+            >
+            <input
+              type="email"
+              id="contactEmail"
+              name="event[contactEmail]"
+              class="form-control"
+              placeholder="Organizer's email"
+            />
+          </div>
+
+          <div class="col-md-6">
+            <label for="contactPhone" class="form-label fw-semibold"
+              >Contact Phone</label
+            >
+            <input
+              type="tel"
+              id="contactPhone"
+              name="event[contactPhone]"
+              class="form-control"
+              placeholder="Organizer's phone number"
+            />
+          </div>
+        </div>
+
+        <!-- ...Previous fields for title, imageUrl, date, time, venue, price, description -->
+
+        <!-- Schedule Section -->
+        <div class="mb-4">
+          <h5>Event Schedule</h5>
+          <div id="scheduleItems">
+            <div class="row g-2 mb-2 schedule-item">
+              <div class="col-md-4">
+                <input
+                  type="text"
+                  name="event[schedule][0][time]"
+                  class="form-control"
+                  placeholder="Time (e.g. 10:00 AM)"
+                  required
+                />
+              </div>
+              <div class="col-md-8">
+                <input
+                  type="text"
+                  name="event[schedule][0][activity]"
+                  class="form-control"
+                  placeholder="Activity description"
+                  required
+                />
+              </div>
+            </div>
+          </div>
+          <button
+            type="button"
+            id="addSchedule"
+            class="btn btn-sm btn-outline-primary"
+          >
+            Add More Schedule
+          </button>
+        </div>
+
+        <!-- Speakers Section -->
+        <div class="mb-4">
+          <h5>Speakers</h5>
+          <div id="speakersList">
+            <div class="speaker-item border rounded p-3 mb-3">
+              <div class="mb-2">
+                <input
+                  type="text"
+                  name="event[speakers][0][name]"
+                  class="form-control"
+                  placeholder="Speaker Name"
+                  required
+                />
+              </div>
+              <div class="mb-2">
+                <input
+                  type="url"
+                  name="event[speakers][0][photo]"
+                  class="form-control"
+                  placeholder="Photo URL"
+                />
+              </div>
+              <div class="mb-2">
+                <textarea
+                  name="event[speakers][0][bio]"
+                  class="form-control"
+                  placeholder="Short bio"
+                ></textarea>
+              </div>
+              <div class="row g-2">
+                <div class="col-md-6">
+                  <input
+                    type="url"
+                    name="event[speakers][0][social][twitter]"
+                    class="form-control"
+                    placeholder="Twitter URL"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <input
+                    type="url"
+                    name="event[speakers][0][social][linkedin]"
+                    class="form-control"
+                    placeholder="LinkedIn URL"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <button
+            type="button"
+            id="addSpeaker"
+            class="btn btn-sm btn-outline-primary"
+          >
+            Add More Speaker
+          </button>
+        </div>
+
+        <!-- Map Embed URL -->
+        <div class="mb-3">
+          <label for="mapEmbedUrl" class="form-label fw-semibold"
+            >Google Map Embed URL</label
+          >
+          <input
+            type="url"
+            id="mapEmbedUrl"
+            name="event[mapEmbedUrl]"
+            class="form-control"
+            placeholder="Paste Google Maps embed link here"
+          />
+        </div>
+
+        <!-- FAQs Section -->
+        <div class="mb-4">
+          <h5>FAQs</h5>
+          <div id="faqsList">
+            <div class="faq-item mb-3">
+              <input
+                type="text"
+                name="event[faqs][0][question]"
+                class="form-control mb-2"
+                placeholder="FAQ Question"
+                required
+              />
+              <textarea
+                name="event[faqs][0][answer]"
+                class="form-control"
+                placeholder="FAQ Answer"
+                required
+              ></textarea>
+            </div>
+          </div>
+          <button
+            type="button"
+            id="addFaq"
+            class="btn btn-sm btn-outline-primary"
+          >
+            Add More FAQ
+          </button>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100 py-2 fw-semibold">
+          Create Event
+        </button>
+      </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
+<script>
+  let scheduleIndex = 1;
+  document.getElementById('addSchedule').addEventListener('click', () => {
+    const container = document.getElementById('scheduleItems');
+    const div = document.createElement('div');
+    div.classList.add('row', 'g-2', 'mb-2', 'schedule-item');
+    div.innerHTML = `
+      <div class="col-md-4">
+        <input type="text" name="event[schedule][${scheduleIndex}][time]" class="form-control" placeholder="Time (e.g. 10:00 AM)" required />
+      </div>
+      <div class="col-md-8">
+        <input type="text" name="event[schedule][${scheduleIndex}][activity]" class="form-control" placeholder="Activity description" required />
+      </div>
+    `;
+    container.appendChild(div);
+    scheduleIndex++;
+  });
+
+  let speakerIndex = 1;
+  document.getElementById('addSpeaker').addEventListener('click', () => {
+    const container = document.getElementById('speakersList');
+    const div = document.createElement('div');
+    div.classList.add('speaker-item', 'border', 'rounded', 'p-3', 'mb-3');
+    div.innerHTML = `
+      <div class="mb-2">
+        <input type="text" name="event[speakers][${speakerIndex}][name]" class="form-control" placeholder="Speaker Name" required />
+      </div>
+      <div class="mb-2">
+        <input type="url" name="event[speakers][${speakerIndex}][photo]" class="form-control" placeholder="Photo URL" />
+      </div>
+      <div class="mb-2">
+        <textarea name="event[speakers][${speakerIndex}][bio]" class="form-control" placeholder="Short bio"></textarea>
+      </div>
+      <div class="row g-2">
+        <div class="col-md-6">
+          <input type="url" name="event[speakers][${speakerIndex}][social][twitter]" class="form-control" placeholder="Twitter URL" />
+        </div>
+        <div class="col-md-6">
+          <input type="url" name="event[speakers][${speakerIndex}][social][linkedin]" class="form-control" placeholder="LinkedIn URL" />
+        </div>
+      </div>
+    `;
+    container.appendChild(div);
+    speakerIndex++;
+  });
+
+  let faqIndex = 1;
+  document.getElementById('addFaq').addEventListener('click', () => {
+    const container = document.getElementById('faqsList');
+    const div = document.createElement('div');
+    div.classList.add('faq-item', 'mb-3');
+    div.innerHTML = `
+      <input type="text" name="event[faqs][${faqIndex}][question]" class="form-control mb-2" placeholder="FAQ Question" required />
+      <textarea name="event[faqs][${faqIndex}][answer]" class="form-control" placeholder="FAQ Answer" required></textarea>
+    `;
+    container.appendChild(div);
+    faqIndex++;
+  });
+</script>
